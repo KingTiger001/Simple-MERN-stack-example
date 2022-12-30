@@ -110,7 +110,23 @@ const updateBlog = async(req,res,next) => {
     return res.status(200).json({blog});
 }
 
+const getById = async (req,res,next) =>{
+    const id = req.params.id;
+    let blog;
 
+    try{
+        blog = await Blog.findById(id);
+    }
+    catch(e){
+        return console.log(e);
+    }
+
+    if(!blog){
+        return res.status(500).json({ message : "not found"});
+    }
+    
+    return res.status(200).json({blog});
+}
 
 const deleteBlog = async(req,res,next) => {
 
